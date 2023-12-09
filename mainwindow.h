@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QTimer>
+#include "stopwatch.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -19,13 +20,22 @@ public:
 
 private:
     Ui::MainWindow *ui;
-  //  QTimer *myTimer;
-    int currTime = 0;
+
+ //   int currTime = 0;
+    stopwatch *myWatch;
+    float myTime = 0;
+    QString myText = "";
+    unsigned short lapCounter = 0;
 //private slots:
 
 //void on_pushButton_clicked();
 signals:
 void handle_Tim();
+
+private slots:
+void on_BtnStartStop_clicked();
+void drawTime();
+void addText();
 
 };
 #endif // MAINWINDOW_H
