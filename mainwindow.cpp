@@ -11,10 +11,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     connect(myWatch, &stopwatch::isStart, myWatch, &stopwatch::start);
     connect(myWatch, &stopwatch::update, this, &MainWindow::drawTime);
-    connect(ui->btnClear, &QPushButton::clicked, this, [&](){myTime = 0;
-               lapCounter = 0;
-               ui->TimeIndication->setText(QString::number(myTime));});
-    connect(ui->btnCircle, &QPushButton::clicked, this, addText);
+    connect(ui->btnClear, &QPushButton::clicked, myWatch, &stopwatch::reset);
+    connect(ui->btnClear, &QPushButton::clicked, this, [&](){ui->TimeIndication->setText("0");});
+    connect(ui->btnCircle, &QPushButton::clicked, this, &MainWindow::addText);
         qDebug() << "Run";
 
         ui->TimeIndication->setText("0");
@@ -47,15 +46,10 @@ void MainWindow::on_BtnStartStop_clicked()
 
 void MainWindow::drawTime()
 {
-        myTime+=0.1;
-        ui->TimeIndication->setText(QString::number(myTime));
+        ui->TimeIndication->setText(QString::number(myWatch->getTime()));
 }
 
 void MainWindow::addText()
 {
-    QString s = "";
-    QTextStream qs(&s);
-    qs << "Круг " << lapCounter++ << ", время:" << myTime << " сек" << Qt::endl;
-
-    ui->textBrowser->insertPlainText(s);
+    ui->textBrowser->insertPlainText(myWatch->lapString());
 }

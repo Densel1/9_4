@@ -10,13 +10,23 @@ class stopwatch : public QObject
 private:
     QTimer *myTimer;
     float myTime = 0;
+    float prevLapTime = 0;
+    float lapTime;
+    unsigned short lapCounter = 0;
+
 public:
     explicit stopwatch(QObject *parent = nullptr);
+    float getTime()
+    {
+        return myTime;
+    }
+    QString lapString();
 
 public slots:
+
     void start(bool chk = false);
-    void stop();
     void reset();
+   void tic();
 
 signals:
     void isStart(bool start = false);

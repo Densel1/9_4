@@ -17,18 +17,11 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-
 private:
     Ui::MainWindow *ui;
 
- //   int currTime = 0;
     stopwatch *myWatch;
-    float myTime = 0;
-    QString myText = "";
-    unsigned short lapCounter = 0;
-//private slots:
 
-//void on_pushButton_clicked();
 signals:
 void handle_Tim();
 
